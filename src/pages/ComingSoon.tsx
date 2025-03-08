@@ -58,14 +58,14 @@ const ComingSoon: React.FC = () => {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
 
-    setTimeout(() => setShowContent(true), 3000); // Show content after 3s animation
+    setTimeout(() => setShowContent(true), 2000); // Show content after 3s animation
 
     return () => clearInterval(timer);
   }, []);
 
   const numberVariants = {
-    initial: { opacity: 0, y: -20, scale: 0.8 },
-    animate: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5 } },
+    initial: { opacity: 0, y: -20, scale: 0.2 },
+    animate: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.7 } },
     exit: { opacity: 0, y: 20, scale: 0.8, transition: { duration: 0.3 } },
   };
 
@@ -123,12 +123,12 @@ const ComingSoon: React.FC = () => {
               <IonRow className="justify-center">
                 <IonText
                   color="secondary"
-                  className="text-xl text-center font-bold"
+                  className="text-xl text-center font-bold pt-4"
                 >
                   We’re Coming Soon
                 </IonText>
               </IonRow>
-              <IonRow className="justify-center">
+              <IonRow className="justify-center mt-4">
                 <IonCol
                   size="auto"
                   className="flex gap-2 items-center text-center"
@@ -189,25 +189,27 @@ const ComingSoon: React.FC = () => {
                 </IonText>
               </IonRow>
               <IonRow className="justify-center w-full pt-2 pb-10">
-                <IonCol size="10">
+                <IonCol size="8">
                   <IonInput
                     type="email"
                     placeholder="Enter your email"
                     value={email}
                     onIonInput={(e) => setEmail(e.detail.value ?? "")}
-                    className="border p-2 w-full rounded-md"
+                    className="border w-full rounded-md"
                   />
 
                   {error && (
                     <p className="text-red-500 text-sm mt-2">{error}</p>
                   )}
-                  <IonButton
-                    expand="block"
-                    className="mt-3 px-16"
-                    onClick={handleSubmit}
-                  >
-                    Notify Me
-                  </IonButton>
+                  <div className="w-full flex items-center justify-center">
+                    <IonButton
+                      size="small"
+                      className="mt-3 bg-orange-500 text-white mx-auto"
+                      onClick={handleSubmit}
+                    >
+                      Notify Me
+                    </IonButton>
+                  </div>
                 </IonCol>
               </IonRow>
               <IonRow className="justify-center mt-4 mx-auto w-full ion-align-items-end">

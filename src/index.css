@@ -1,1 +1,57 @@
 @import "tailwindcss";
+
+/* Load Playfair Display from local assets */
+@font-face {
+    font-family: "Playfair Display";
+    src: url("/fonts/Playfair_Display/static/PlayfairDisplay-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Playfair Display";
+    src: url("/fonts/Playfair_Display/static/PlayfairDisplay-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Playfair Display";
+    src: url("/fonts/Playfair_Display/static/PlayfairDisplay-Italic.ttf") format("truetype");
+    font-weight: 400;
+    font-style: italic;
+}
+
+:root {
+    --font-primary: "Playfair Display", serif;
+    --font-secondary: "Poppins", sans-serif;
+
+    --ion-color-primary: #046307; /* Emerald Green */
+    --ion-color-primary-rgb: 4, 99, 7;
+    --ion-color-primary-contrast: #ffffff;
+    --ion-color-primary-contrast-rgb: 255, 255, 255;
+    --ion-color-primary-shade: #014d03;
+    --ion-color-primary-tint: #3a7d44;
+
+    --ion-color-secondary: #c9a227; /* Gold */
+    --ion-color-secondary-rgb: 201, 162, 39;
+    --ion-color-secondary-contrast: #000000;
+    --ion-color-secondary-contrast-rgb: 0, 0, 0;
+    --ion-color-secondary-shade: #b8860b;
+    --ion-color-secondary-tint: #e5c100;
+
+    --ion-color-tertiary: #000000; /* Black */
+    --ion-color-tertiary-rgb: 0, 0, 0;
+    --ion-color-tertiary-contrast: #ffffff;
+    --ion-color-tertiary-contrast-rgb: 255, 255, 255;
+    --ion-color-tertiary-shade: #121212;
+    --ion-color-tertiary-tint: #2b2b2b;
+
+    --ion-color-light: #ffffff; /* White */
+    --ion-color-dark: #212529; /* Dark Gray */
+}
+
+/* Apply font globally */
+body {
+    font-family: var(--font-primary);
+}

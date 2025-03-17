@@ -55,3 +55,7 @@
 body {
     font-family: var(--font-primary);
 }
+
+.secondary-link-text {
+  color:  #c9a227 !important; /* Override the default color */
+}

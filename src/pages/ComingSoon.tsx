@@ -16,16 +16,27 @@ import { logoInstagram } from "ionicons/icons";
 import { useEmail } from "../context/EmailContext"; // Import context
 
 const ComingSoon: React.FC = () => {
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 60000); // Update every 1 minute instead of every second
+
+    setTimeout(() => setShowContent(true), 2000); // Show content after animation
+
+    return () => clearInterval(timer);
+  }, []);
+  const [showContent, setShowContent] = useState(false);
   const { addEmail } = useEmail(); // Access email function
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
+
   const calculateTimeLeft = () => {
     const openingDate = new Date("2025-04-01T00:00:00").getTime(); // Set your opening date
     const now = new Date().getTime();
     const difference = openingDate - now;
 
     if (difference <= 0) {
-      return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+      return { days: 0, hours: 0, minutes: 0 };
     }
 
     return {
@@ -34,9 +45,10 @@ const ComingSoon: React.FC = () => {
         (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
       ),
       minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
-      seconds: Math.floor((difference % (1000 * 60)) / 1000),
     };
   };
+
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
   const handleSubmit = async () => {
     setError("");
@@ -49,19 +61,6 @@ const ComingSoon: React.FC = () => {
     setEmail(""); // Clear input after submission
     alert("Thank you for signing up!");
   };
-
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
-  const [showContent, setShowContent] = useState(false);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft());
-    }, 1000);
-
-    setTimeout(() => setShowContent(true), 2000); // Show content after 3s animation
-
-    return () => clearInterval(timer);
-  }, []);
 
   const numberVariants = {
     initial: { opacity: 0, y: -20, scale: 0.2 },
@@ -77,7 +76,7 @@ const ComingSoon: React.FC = () => {
       >
         <IonGrid
           color="secondary"
-          className="max-w-xl mx-auto flex flex-col items-center justify-center h-full"
+          className="mx-auto flex flex-col items-center justify-center h-full"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
@@ -87,7 +86,7 @@ const ComingSoon: React.FC = () => {
             }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1.5 }}
-            className={`absolute flex items-center justify-center w-full h-full transition-opacity ${
+            className={`absolute  container flex items-center justify-center w-full h-full transition-opacity ${
               showContent ? "hidden" : "flex"
             }`}
           >
@@ -116,69 +115,59 @@ const ComingSoon: React.FC = () => {
                         .href
                     }
                     alt="HOHM Logo"
-                    className="w-40 mx-auto mb-6 bg-white"
+                    className="w-40 mx-auto mb-6"
                   />
                 </IonCol>
               </IonRow>
+
               <IonRow className="justify-center">
                 <IonText
                   color="secondary"
                   className="text-xl text-center font-bold pt-4"
                 >
-                  We’re Coming Soon
+                  Coming Soon
                 </IonText>
               </IonRow>
+
               <IonRow className="justify-center mt-4">
                 <IonCol
                   size="auto"
-                  className="flex gap-2 items-center text-center"
+                  className="flex gap-2 items-center text-center px-4 rounded-md"
                 >
                   {/* Days */}
                   <motion.div
-                    key={`days-${timeLeft.days}-${Date.now()}`} // Unique key fix
+                    key={`days-${timeLeft.days}`} // Unique key for animation
                     variants={numberVariants}
                     initial="initial"
                     animate="animate"
                     exit="exit"
-                    className="text-lg font-bold bg-[#2C3E50] text-[#F5F5F5] px-4 py-2 rounded-lg shadow-lg border border-[#B0A999]"
+                    className="text-lg font-bold text-[#2C3E50] py-2 rounded-lg"
                   >
-                    {timeLeft.days}d
+                    {timeLeft.days} days
                   </motion.div>
 
                   {/* Hours */}
                   <motion.div
-                    key={`hours-${timeLeft.hours}-${Date.now()}`} // Unique key fix
+                    key={`hours-${timeLeft.hours}`} // Unique key for animation
                     variants={numberVariants}
                     initial="initial"
                     animate="animate"
                     exit="exit"
-                    className="text-lg font-bold bg-[#B0A999] text-[#2C3E50] px-4 py-2 rounded-lg shadow-lg border border-[#D4AF37]"
+                    className="text-lg font-bold py-2 rounded-lg "
                   >
-                    {timeLeft.hours}h
+                    {timeLeft.hours} hours
                   </motion.div>
 
                   {/* Minutes */}
                   <motion.div
-                    key={`minutes-${timeLeft.minutes}-${Date.now()}`} // Unique key fix
+                    key={`minutes-${timeLeft.minutes}`} // Unique key for animation
                     variants={numberVariants}
                     initial="initial"
                     animate="animate"
                     exit="exit"
-                    className="text-lg font-bold bg-[#D4AF37] text-[#2C3E50] px-4 py-2 rounded-lg shadow-lg border border-[#B0A999]"
+                    className="text-lg font-bold text-[#2C3E50] py-2 rounded-lg"
                   >
-                    {timeLeft.minutes}m
-                  </motion.div>
-
-                  {/* Seconds */}
-                  <motion.div
-                    key={`seconds-${timeLeft.seconds}-${Date.now()}`} // Unique key fix
-                    variants={numberVariants}
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                    className="text-lg font-bold bg-[#2C3E50] text-[#D4AF37] px-4 py-2 rounded-lg shadow-lg border border-[#B0A999] animate-pulse"
-                  >
-                    {timeLeft.seconds}s
+                    {timeLeft.minutes} m
                   </motion.div>
                 </IonCol>
               </IonRow>
@@ -188,20 +177,21 @@ const ComingSoon: React.FC = () => {
                   Drop your contact to get updates!
                 </IonText>
               </IonRow>
-              <IonRow className="justify-center w-full pt-2 pb-10">
-                <IonCol size="8">
+
+              <IonRow className="justify-center w-full pt-4 px-8 pb-10 max-w-xl mx-auto">
+                <IonCol size="12">
                   <IonInput
                     type="email"
                     placeholder="Enter your email"
                     value={email}
                     onIonInput={(e) => setEmail(e.detail.value ?? "")}
-                    className="border w-full rounded-md"
+                    className="border-b w-full border-slate-200 text-slate-200"
                   />
 
                   {error && (
                     <p className="text-red-500 text-sm mt-2">{error}</p>
                   )}
-                  <div className="w-full flex items-center justify-center">
+                  <div className="w-full flex flex-col items-center justify-center">
                     <IonButton
                       size="small"
                       className="mt-3 bg-orange-500 text-white mx-auto"
@@ -210,8 +200,32 @@ const ComingSoon: React.FC = () => {
                       Notify Me
                     </IonButton>
                   </div>
+                  <div></div>
                 </IonCol>
               </IonRow>
+              <IonRow class="justify-center align-center w-full pt-4 pb-10 max-w-xl mx-auto">
+                <IonCol size="12" class="flex items-center justify-center">
+                  <IonText color="primary" class="text-sm text-center">
+                    For bookings, visit the link below!
+                  </IonText>
+                </IonCol>
+                <IonCol size="12" class="flex items-center justify-center">
+                  <IonButton
+                    fill="clear"
+                    color="secondary"
+                    size="small"
+                    className="mt-3 mx-auto"
+                  >
+                    <a
+                      className="secondary-link-text"
+                      href="http://app.squareup.com/appointments/book/wp2m5faff33zv7/LPH7PHEPKCN59/start"
+                    >
+                      Booking Link
+                    </a>
+                  </IonButton>
+                </IonCol>
+              </IonRow>
+
               <IonRow className="justify-center mt-4 mx-auto w-full ion-align-items-end">
                 <IonCol size="auto">
                   <IonButton

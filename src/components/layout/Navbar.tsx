@@ -1,85 +1,110 @@
 import {
-  IonHeader,
-  IonToolbar,
-  IonTitle,
-  IonButtons,
-  IonButton,
-  IonMenuButton,
-  IonMenu,
   IonContent,
-  IonList,
+  IonHeader,
   IonItem,
+  IonList,
+  IonMenu,
+  IonMenuButton,
+  IonMenuToggle,
+  IonToolbar,
 } from "@ionic/react";
-import { useHistory } from "react-router-dom";
-import { menuController } from "@ionic/core";
+import { Link, useLocation } from "react-router-dom";
 
-const closeMenuAndNavigate = async (path: string) => {
-  await menuController.close();
-  window.location.href = path;
-};
+import logoTransparent from "../../assets/logo-transparent.png";
+import { bookingAction, navItems, siteContent } from "../../content/siteContent";
+import CtaLink from "../ui/CtaLink";
 
-const Navbar: React.FC = () => {
+const Navbar = () => {
+  const location = useLocation();
+
   return (
     <>
-      {/* Side Menu */}
-      <IonMenu
-        side="start"
-        menuId="main-menu"
-        contentId="main-content"
-        swipeGesture={true}
-      >
-        <IonContent>
-          <IonList>
-            <IonItem
-              button
-              routerLink="/home"
-              onClick={() => closeMenuAndNavigate("/home")}
-            >
-              Home
-            </IonItem>
-            <IonItem
-              button
-              routerLink="/about"
-              onClick={() => closeMenuAndNavigate("/about")}
-            >
-              About
-            </IonItem>
-            <IonItem
-              button
-              routerLink="/services"
-              onClick={() => closeMenuAndNavigate("/services")}
-            >
-              Services
-            </IonItem>
-            <IonItem
-              button
-              routerLink="/contact"
-              onClick={() => closeMenuAndNavigate("/contact")}
-            >
-              Contact
-            </IonItem>
+      <IonMenu side="start" menuId="main-menu" contentId="main-content">
+        <IonContent className="hhm-menu">
+          <div className="px-6 pb-6 pt-8">
+            <p className="text-xs uppercase tracking-[0.35em] text-[#9f7b49]">
+              {siteContent.brand.city}
+            </p>
+            <h2 className="font-display mt-3 text-3xl text-[#1f1a17]">
+              {siteContent.brand.name}
+            </h2>
+            <p className="mt-3 max-w-xs text-sm leading-6 text-[#5c5147]">
+              {siteContent.brand.tagline}
+            </p>
+          </div>
+
+          <IonList lines="none" className="px-4 pb-4">
+            {navItems.map((item) => {
+              const isActive = location.pathname === item.href;
+
+              return (
+                <IonMenuToggle key={item.href} autoHide={false}>
+                  <IonItem
+                    button
+                    detail={false}
+                    routerLink={item.href}
+                    className={`menu-link ${isActive ? "menu-link-active" : ""}`}
+                  >
+                    {item.label}
+                  </IonItem>
+                </IonMenuToggle>
+              );
+            })}
           </IonList>
+
+          <div className="px-6 pb-10">
+            <CtaLink {...bookingAction} className="w-full justify-center" />
+          </div>
         </IonContent>
       </IonMenu>
 
-      {/* Navbar */}
-      <IonHeader>
-        <IonToolbar className="bg-primary text-base flex justify-between items-center px-4">
-          {/* Menu Button for Mobile */}
-          <IonButtons slot="start" className="md:hidden">
-            <IonMenuButton menu="main-menu" />
-          </IonButtons>
+      <IonHeader className="ion-no-border">
+        <IonToolbar className="hhm-toolbar px-4">
+          <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 py-2">
+            <div className="flex items-center gap-3">
+              <IonMenuButton menu="main-menu" className="hhm-menu-button lg:hidden" />
 
-          {/* Centered Logo */}
-          <IonTitle className="text-center">HOHM</IonTitle>
+              <Link to="/" className="flex items-center gap-3">
+                <img
+                  src={logoTransparent}
+                  alt={siteContent.brand.name}
+                  className="h-11 w-auto"
+                />
+                <div className="hidden sm:block">
+                  <p className="text-[0.65rem] uppercase tracking-[0.35em] text-[#9f7b49]">
+                    {siteContent.brand.city}
+                  </p>
+                  <p className="font-display text-lg text-[#1f1a17]">
+                    {siteContent.brand.shortName}
+                  </p>
+                </div>
+              </Link>
+            </div>
 
-          {/* Desktop Navigation */}
-          <IonButtons slot="end" className="hidden md:flex space-x-4">
-            <IonButton routerLink="/home">Home</IonButton>
-            <IonButton routerLink="/about">About</IonButton>
-            <IonButton routerLink="/services">Services</IonButton>
-            <IonButton routerLink="/contact">Contact</IonButton>
-          </IonButtons>
+            <nav className="hidden items-center gap-2 lg:flex">
+              {navItems.map((item) => {
+                const isActive = location.pathname === item.href;
+
+                return (
+                  <Link
+                    key={item.href}
+                    to={item.href}
+                    className={`rounded-full px-4 py-2 text-sm transition ${
+                      isActive
+                        ? "bg-[#1f1a17] text-[#f6eee2]"
+                        : "text-[#352c26] hover:bg-white/70"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </nav>
+
+            <div className="hidden lg:block">
+              <CtaLink {...bookingAction} />
+            </div>
+          </div>
         </IonToolbar>
       </IonHeader>
     </>

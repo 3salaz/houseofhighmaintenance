@@ -1,17 +1,23 @@
-import { IonPage, IonContent } from "@ionic/react";
-import Navbar from "./Navbar";
+import type { ReactNode } from "react";
+import { IonContent, IonPage } from "@ionic/react";
+
 import Footer from "./Footer";
+import Navbar from "./Navbar";
 
 interface LayoutProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const Layout = ({ children }: LayoutProps) => {
   return (
-    <IonPage id="main-content">
+    <IonPage className="hhm-shell">
       <Navbar />
-      <IonContent>{children}</IonContent>
-      <Footer />
+      <IonContent id="main-content" className="hhm-content">
+        <div className="min-h-full">
+          {children}
+          <Footer />
+        </div>
+      </IonContent>
     </IonPage>
   );
 };

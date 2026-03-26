@@ -1,0 +1,164 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Playfair Display";
+  src: url("/fonts/Playfair_Display/static/PlayfairDisplay-Regular.ttf")
+    format("truetype");
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Playfair Display";
+  src: url("/fonts/Playfair_Display/static/PlayfairDisplay-Bold.ttf")
+    format("truetype");
+  font-style: normal;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Playfair Display";
+  src: url("/fonts/Playfair_Display/static/PlayfairDisplay-Italic.ttf")
+    format("truetype");
+  font-style: italic;
+  font-weight: 400;
+}
+
+:root {
+  --font-display: "Playfair Display", serif;
+  --font-body: "Avenir Next", "Helvetica Neue", "Segoe UI", sans-serif;
+
+  --ion-font-family: var(--font-body);
+  --ion-background-color: transparent;
+  --ion-text-color: #1f1a17;
+
+  --hhm-ivory: #f5eee3;
+  --hhm-cream: #f9f4ec;
+  --hhm-ink: #1f1a17;
+  --hhm-mocha: #574c43;
+  --hhm-gold: #b7894e;
+  --hhm-gold-soft: #d3b37a;
+  --hhm-border: #dccdb5;
+}
+
+html,
+body,
+#root,
+ion-app,
+ion-router-outlet,
+ion-content {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at top left, rgba(211, 179, 122, 0.26), transparent 32%),
+    radial-gradient(circle at 85% 15%, rgba(145, 110, 70, 0.14), transparent 24%),
+    linear-gradient(180deg, #f9f3e8 0%, #f5eee3 40%, #efe4d6 100%);
+  color: var(--hhm-ink);
+  font-family: var(--font-body);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.03em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ion-content {
+  --background: transparent;
+}
+
+.hhm-shell {
+  background: transparent;
+}
+
+.hhm-toolbar {
+  --background: rgba(249, 244, 236, 0.84);
+  --border-color: transparent;
+  backdrop-filter: blur(18px);
+}
+
+.hhm-menu {
+  --background:
+    radial-gradient(circle at top left, rgba(211, 179, 122, 0.24), transparent 34%),
+    linear-gradient(180deg, #faf5ee 0%, #f3e9dc 100%);
+}
+
+.hhm-menu-button {
+  --color: #1f1a17;
+}
+
+.menu-link {
+  --background: transparent;
+  --color: #1f1a17;
+  --border-color: transparent;
+  --inner-padding-end: 0;
+  margin-bottom: 0.5rem;
+}
+
+.menu-link::part(native) {
+  border-radius: 999px;
+}
+
+.menu-link-active::part(native) {
+  background: rgba(31, 26, 23, 0.08);
+}
+
+::selection {
+  background: rgba(183, 137, 78, 0.28);
+  color: #1f1a17;
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0);
+  }
+}
+
+.hhm-orb {
+  pointer-events: none;
+  position: absolute;
+  width: 22rem;
+  height: 22rem;
+  border-radius: 999px;
+  filter: blur(14px);
+  opacity: 0.45;
+  animation: drift 12s ease-in-out infinite;
+}
+
+.hhm-orb-top {
+  top: -8rem;
+  right: -6rem;
+  background: radial-gradient(circle, rgba(211, 179, 122, 0.72), rgba(211, 179, 122, 0));
+}
+
+.hhm-orb-bottom {
+  bottom: -8rem;
+  left: -6rem;
+  background: radial-gradient(circle, rgba(128, 92, 57, 0.28), rgba(128, 92, 57, 0));
+}
+
+@media (max-width: 768px) {
+  .hhm-orb {
+    width: 16rem;
+    height: 16rem;
+  }
+}

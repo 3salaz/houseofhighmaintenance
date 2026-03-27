@@ -5,10 +5,20 @@ import CtaLink from "../ui/CtaLink";
 const HeroSection = () => {
   return (
     <section className="relative overflow-hidden px-6 pb-16 pt-12 sm:pb-20 sm:pt-16">
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-20"
+        style={{
+          backgroundImage: "url('https://source.unsplash.com/random/1920x1080/?salon')",
+        }}
+      />
+      {/* Overlay for better text readability */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#f5eee3]/80 to-[#f5eee3]/60" />
+
       <div className="hhm-orb hhm-orb-top" />
       <div className="hhm-orb hhm-orb-bottom" />
 
-      <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+      <div className="relative z-10 mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
         <div className="relative z-10">
           <p className="text-sm uppercase tracking-[0.35em] text-[#9f7b49]">
             {siteContent.hero.eyebrow}
@@ -43,11 +53,11 @@ const HeroSection = () => {
 
         <div className="relative z-10">
           <div className="rounded-[2.5rem] border border-[#dccdb5] bg-white/70 p-6 shadow-[0_30px_100px_rgba(75,52,28,0.12)] backdrop-blur sm:p-8">
-            <div className="rounded-[2rem] bg-[#1f1a17] p-8 text-[#f6eee2]">
+            <div className="rounded-[2rem] bg-gradient-to-br from-[#d3b37a] to-[#1f1a17] p-8 text-[#f6eee2]">
               <img
                 src={logoTransparent}
                 alt="House of High Maintenance brand mark"
-                className="h-16 w-auto opacity-95 bg-white"
+                className="h-16 w-auto opacity-95 bg-white rounded-md p-2"
               />
               <p className="mt-8 text-sm uppercase tracking-[0.35em] text-[#d3b37a]">
                 Launch Focus

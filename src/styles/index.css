@@ -38,6 +38,8 @@
   --hhm-mocha: #574c43;
   --hhm-gold: #b7894e;
   --hhm-gold-soft: #d3b37a;
+  --hhm-gold-deep: #8b5a2b;
+  --hhm-rose: #e8c5b0;
   --hhm-border: #dccdb5;
 }
 
@@ -53,8 +55,16 @@ ion-content {
 body {
   margin: 0;
   background:
-    radial-gradient(circle at top left, rgba(211, 179, 122, 0.26), transparent 32%),
-    radial-gradient(circle at 85% 15%, rgba(145, 110, 70, 0.14), transparent 24%),
+    radial-gradient(
+      circle at top left,
+      rgba(211, 179, 122, 0.26),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 85% 15%,
+      rgba(145, 110, 70, 0.14),
+      transparent 24%
+    ),
     linear-gradient(180deg, #f9f3e8 0%, #f5eee3 40%, #efe4d6 100%);
   color: var(--hhm-ink);
   font-family: var(--font-body);
@@ -94,7 +104,11 @@ ion-content {
 
 .hhm-menu {
   --background:
-    radial-gradient(circle at top left, rgba(211, 179, 122, 0.24), transparent 34%),
+    radial-gradient(
+      circle at top left,
+      rgba(211, 179, 122, 0.24),
+      transparent 34%
+    ),
     linear-gradient(180deg, #faf5ee 0%, #f3e9dc 100%);
 }
 
@@ -147,13 +161,21 @@ ion-content {
 .hhm-orb-top {
   top: -8rem;
   right: -6rem;
-  background: radial-gradient(circle, rgba(211, 179, 122, 0.72), rgba(211, 179, 122, 0));
+  background: radial-gradient(
+    circle,
+    rgba(211, 179, 122, 0.72),
+    rgba(211, 179, 122, 0)
+  );
 }
 
 .hhm-orb-bottom {
   bottom: -8rem;
   left: -6rem;
-  background: radial-gradient(circle, rgba(128, 92, 57, 0.28), rgba(128, 92, 57, 0));
+  background: radial-gradient(
+    circle,
+    rgba(128, 92, 57, 0.28),
+    rgba(128, 92, 57, 0)
+  );
 }
 
 @media (max-width: 768px) {
